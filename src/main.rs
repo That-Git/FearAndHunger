@@ -5,7 +5,7 @@ use dialoguer::Select;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let selections = &["Head", "Tails"];
+    let selections = &["Heads", "Tails"];
     let selection = Select::new().default(0).items(&selections[..]).interact().unwrap();
     // get the two arguments
     let args: Vec<String> = std::env::args().collect();
