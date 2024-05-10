@@ -11,7 +11,7 @@ async fn main() -> Result<()> {
     let start = args.get(0).unwrap_or(&start_arg);
     let end = args.get(1).unwrap_or(&end_arg);
 
-    let mut ban_count = 0;
+    let mut wins = 0;
     for _ in 0..5 {
         // Command
         let mut sum = 0;
@@ -24,10 +24,10 @@ async fn main() -> Result<()> {
         }
 
         println!("your sum is {}", sum);
-        ban_count += if sum % 2 == 0 { 1 } else { 0 };
+        wins += if sum % 2 == 0 { 1 } else { 0 };
     }
     println!("you are...");
     tokio::time::sleep(Duration::from_secs(3)).await;
-    println!("ban_count {}", ban_count);
+    println!("wins {}", wins);
     return Ok(());
 }
