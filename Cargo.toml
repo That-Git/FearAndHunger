@@ -1,5 +1,5 @@
 [package]
-name = "coin-filp"
+name = "fear-and-hunger"
 version = "0.1.0"
 edition = "2021"
 publish = ["crates-io"]
