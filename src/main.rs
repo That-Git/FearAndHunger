@@ -1,9 +1,12 @@
 use std::time::Duration;
 use anyhow::{Context, Result};
 use rand::{Rng, thread_rng};
+use dialoguer::Select;
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    let selections = &["Head", "Tails"];
+    let selection = Select::new().default(0).items(&selections[..]).interact().unwrap();
     // get the two arguments
     let args: Vec<String> = std::env::args().collect();
     let start_arg = "42".to_string();
