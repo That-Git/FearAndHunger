@@ -21,7 +21,6 @@ async fn main() -> Result<()> {
         for i in 0..4 {
             let mut rng = thread_rng();
             
-            // Generate a random integer between 1 and 10
             let coin: i8 = rng.gen_range(1..=2);
             sum += coin
         }
