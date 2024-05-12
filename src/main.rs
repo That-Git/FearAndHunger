@@ -28,8 +28,16 @@ async fn main() -> Result<()> {
         println!("your sum is {}", sum);
         wins += if sum % 2 == 0 { 1 } else { 0 };
     }
-    println!("you are...");
+    println!("drum roll please...");
     tokio::time::sleep(Duration::from_secs(3)).await;
-    println!("wins {}", wins);
+    if value == 0 {
+        side(wins, "Heads");
+    } else {
+        side(wins, "tails");
+    };
     return Ok(());
+}
+
+fn side(wins: i8,face: &str) {
+    println!("{} {}", wins, face);
 }
