@@ -14,16 +14,18 @@ async fn main() -> Result<()> {
     let start = args.get(0).unwrap_or(&start_arg);
     let end = args.get(1).unwrap_or(&end_arg);
 
-    let mut sum = 0;
-    for _ in 0..5 {
+    let mut sum: u8 = 0;
+    let of: u8 = 5;
+    for _ in 0..of {
         let mut rng = thread_rng();
         
-        let coin: i8 = rng.gen_range(0..=1);
+        let coin: u8 = rng.gen_range(0..=1);
         sum += coin
     }
+    let percent: f64 = 100.0*f64::from(sum)/f64::from(of);
     println!("drum roll please...");
     tokio::time::sleep(Duration::from_secs(3)).await;
-    println!("{} {}", sum, if value == 0 { "Heads" } else { "tails" });
+    println!("{}% {}", percent, if value == 0 { "Heads" } else { "tails" });
     return Ok(());
 }
 
