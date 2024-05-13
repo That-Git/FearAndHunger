@@ -1,1 +1,1 @@
-![eminem coin flip](https://c.tenor.com/hAyLlbbQhpQAAAAC/tenor.gif)
+![eminem coin flip](EminemCoinFlip.gif)
