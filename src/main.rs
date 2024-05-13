@@ -14,30 +14,16 @@ async fn main() -> Result<()> {
     let start = args.get(0).unwrap_or(&start_arg);
     let end = args.get(1).unwrap_or(&end_arg);
 
-    let mut wins = 0;
+    let mut sum = 0;
     for _ in 0..5 {
-        // Command
-        let mut sum = 0;
-        for i in 0..4 {
-            let mut rng = thread_rng();
-            
-            let coin: i8 = rng.gen_range(1..=2);
-            sum += coin
-        }
-
-        println!("your sum is {}", sum);
-        wins += if sum % 2 == 0 { 1 } else { 0 };
+        let mut rng = thread_rng();
+        
+        let coin: i8 = rng.gen_range(0..=1);
+        sum += coin
     }
     println!("drum roll please...");
     tokio::time::sleep(Duration::from_secs(3)).await;
-    if value == 0 {
-        side(wins, "Heads");
-    } else {
-        side(wins, "tails");
-    };
+    println!("{} {}", sum, if value == 0 { "Heads" } else { "tails" });
     return Ok(());
 }
 
-fn side(wins: i8,face: &str) {
-    println!("{} {}", wins, face);
-}
