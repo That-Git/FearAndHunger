@@ -14,7 +14,7 @@ async fn main() -> Result<()> {
     let start = args.get(0).unwrap_or(&start_arg);
     let end = args.get(1).unwrap_or(&end_arg);
 
-    let of: u32 = signed();
+    let of: u32 = prompt();
     let mut sum: u8 = 0;
     for _ in 0..of {
         let mut rng = thread_rng();
@@ -29,7 +29,7 @@ async fn main() -> Result<()> {
     return Ok(());
 }
 
-fn signed() -> u32 {
+fn prompt() -> u32 {
     let mut input_line = String::new();
     print!("best of ");
     std::io::stdout().flush().unwrap();
