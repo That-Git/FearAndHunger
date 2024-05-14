@@ -14,7 +14,7 @@ async fn main() -> Result<()> {
     let start = args.get(0).unwrap_or(&start_arg);
     let end = args.get(1).unwrap_or(&end_arg);
 
-    let of: u32 = prompt();
+    let of: u16 = prompt();
     let mut sum: u8 = 0;
     for _ in 0..of {
         let mut rng = thread_rng();
@@ -29,14 +29,14 @@ async fn main() -> Result<()> {
     return Ok(());
 }
 
-fn prompt() -> u32 {
+fn prompt() -> u16 {
     let mut input_line = String::new();
     print!("best of ");
     std::io::stdout().flush().unwrap();
     io::stdin() // the rough equivalent of `std::cin`
         .read_line(&mut input_line) // actually read the line
         .expect("Failed to read line"); // which can fail, however
-    let x: u32 = input_line
+    let x: u16 = input_line
         .trim() // ignore whitespace around input
         .parse() // convert to integers
         .expect("Input not an integer"); // which, again, can fail
