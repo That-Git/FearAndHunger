@@ -15,7 +15,7 @@ async fn main() -> Result<()> {
     let end = args.get(1).unwrap_or(&end_arg);
 
     let of: u16 = prompt();
-    let mut sum: u8 = 0;
+    let mut sum: u16 = 0;
     for _ in 0..of {
         let mut rng = thread_rng();
         
