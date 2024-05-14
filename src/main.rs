@@ -25,7 +25,7 @@ async fn main() -> Result<()> {
     let percent: f64 = 100.0*f64::from(sum)/f64::from(of);
     println!("drum roll please...");
     tokio::time::sleep(Duration::from_secs(3)).await;
-    println!("{}% {}", percent, if value == 0 { "Heads" } else { "tails" });
+    println!("{}% {}, you {}", percent, if value == 0 { "Heads" } else { "tails" }, if percent > 50.0 { "won" } else { "lost" });
     return Ok(());
 }
 
