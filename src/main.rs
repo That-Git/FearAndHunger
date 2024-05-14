@@ -1,4 +1,4 @@
-use std::{time::Duration, io};
+use std::{time::Duration, io, io::Write};
 use anyhow::{Context, Result};
 use rand::{Rng, thread_rng};
 use dialoguer::Select;
@@ -31,6 +31,8 @@ async fn main() -> Result<()> {
 
 fn signed() -> u32 {
     let mut input_line = String::new();
+    print!("best of ");
+    std::io::stdout().flush().unwrap();
     io::stdin() // the rough equivalent of `std::cin`
         .read_line(&mut input_line) // actually read the line
         .expect("Failed to read line"); // which can fail, however
