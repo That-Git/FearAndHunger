@@ -19,7 +19,7 @@ async fn main() -> Result<()> {
     for _ in 0..of {
         let mut rng = thread_rng();
         
-        let coin: u8 = rng.gen_range(0..=1);
+        let coin: u16 = rng.gen_range(0..=1);
         sum += coin
     }
     let percent: f64 = 100.0*f64::from(sum)/f64::from(of);
