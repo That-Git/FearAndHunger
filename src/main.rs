@@ -1,5 +1,5 @@
 use std::{time::Duration, io, io::Write};
-use anyhow::{Context, Result};
+use anyhow::Result;
 use rand::{Rng, thread_rng};
 use dialoguer::Select;
 
