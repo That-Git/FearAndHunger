@@ -8,7 +8,7 @@ async fn main() -> Result<()> {
     let faces = &["Heads", "Tails"];
     let value = Select::new().default(0).items(&faces[..]).interact().unwrap();
     // get the two arguments
-    let args: Vec<String> = std::env::args().collect();
+    let args: Vec<String> = cargo();
     let start_arg = "42".to_string();
     let end_arg = "1337".to_string();
     let start = args.get(0).unwrap_or(&start_arg);
@@ -41,4 +41,10 @@ fn prompt() -> u16 {
         .parse() // convert to integers
         .expect("Input not an integer"); // which, again, can fail
     return x;
+}
+
+fn cargo() -> Vec<String> {
+    let mut args: Vec<String> = std::env::args().collect();
+    if &args[0] == "target/debug/x-dl" { args.remove(0); };
+    return args;
 }
