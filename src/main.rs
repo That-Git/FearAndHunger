@@ -45,6 +45,6 @@ fn prompt() -> u16 {
 
 fn cargo() -> Vec<String> {
     let mut args: Vec<String> = std::env::args().collect();
-    if &args[0] == "target/debug/x-dl" { args.remove(0); };
+    if &args[0] == "target/debug/fear-and-hunger" { args.remove(0); };
     return args;
 }
