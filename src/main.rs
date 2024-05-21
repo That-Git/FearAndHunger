@@ -29,7 +29,6 @@ async fn main() -> Result<()> {
     return Ok(());
 }
 
-#[tokio::command]
 fn prompt() -> u16 {
     let mut input_line = String::new();
     print!("best of ");
@@ -44,7 +43,6 @@ fn prompt() -> u16 {
     return x;
 }
 
-#[tokio::command]
 fn cargo() -> Vec<String> {
     let mut args: Vec<String> = std::env::args().collect();
     if &args[0] == "target/debug/fear-and-hunger" { args.remove(0); };
