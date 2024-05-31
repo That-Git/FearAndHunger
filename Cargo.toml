@@ -7,7 +7,7 @@ publish = ["crates-io"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-anyhow = "1.0.75"
+anyhow = "1.0.86"
 dialoguer = "0.11.0"
 rand = "0.8.5"
-tokio = { version = "1.35.1", features = ["full"] }
+tokio = { version = "1.38.0", features = ["full"] }
