@@ -10,7 +10,6 @@ impl Face {
     fn new() -> (Self, u16) {
         let args = Args::parse();
         let chr: &str = &args.face.to_lowercase()[..1];
-        println!("{}",chr);
         let face: Face = match chr {
             "h" => Face::Heads,
             "t" => Face::Tails,
