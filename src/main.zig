@@ -12,13 +12,23 @@ var loop: bool = true;
 
 var cursor: usize = 0;
 
-pub fn main() void {
-    for (std.os.argv) |arg| {
+fn argue() ?bool {
+    const a = std.os.argv;
+    for (a[1..a.len]) |arg| {
         std.debug.print("  {s}\n", .{arg});
     }
-    select() catch {};
-    term.deinit() catch {};
-    print(0 == cursor % 2);
+    return null;
+}
+
+pub fn main() void {
+    const arg = argue();
+    if (arg == null) {
+        select() catch {};
+        term.deinit() catch {};
+        print(0 == cursor % 2);
+    } else {
+        print(arg orelse unreachable);
+    }
 }
 
 fn print(face: bool) void {
