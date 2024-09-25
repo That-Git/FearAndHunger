@@ -3,6 +3,7 @@ const heap = std.heap;
 const math = std.math;
 const mem = std.mem;
 const os = std.posix.system;
+const stdout = std.io.getStdOut().writer();
 
 const spoon = @import("spoon");
 
@@ -11,7 +12,30 @@ var loop: bool = true;
 
 var cursor: usize = 0;
 
-pub fn main() !void {
+pub fn main() void {
+    for (std.os.argv) |arg| {
+        std.debug.print("  {s}\n", .{arg});
+    }
+    select() catch {};
+    term.deinit() catch {};
+    print(0 == cursor % 2);
+}
+
+fn print(face: bool) void {
+    const win = std.crypto.random.boolean();
+    if (face) {
+        stdout.print("heads", .{}) catch {};
+    } else {
+        stdout.print("tails", .{}) catch {};
+    }
+    if (win) {
+        stdout.print(" won!", .{}) catch {};
+    } else {
+        stdout.print(" lost!", .{}) catch {};
+    }
+}
+
+fn select() !void {
     try term.init(.{});
     defer term.deinit() catch {};
 
@@ -37,7 +61,6 @@ pub fn main() !void {
     try render();
 
     var buf: [16]u8 = undefined;
-    var g: bool = false;
     while (loop) {
         _ = try std.posix.poll(&fds, -1);
 
@@ -51,8 +74,11 @@ pub fn main() !void {
             // down, without getting our hands dirty in the interals of zig-spoons
             // Input object.
             if (in.eqlDescription("escape") or in.eqlDescription("q") or in.eqlDescription("enter")) {
-                g = in.eqlDescription("enter");
                 loop = false;
+                if (!in.eqlDescription("enter")) {
+                    term.deinit() catch {};
+                    std.process.exit(0);
+                }
                 break;
             } else if (in.eqlDescription("arrow-down") or in.eqlDescription("C-n") or in.eqlDescription("j")) {
                 if (cursor < 1) {
@@ -70,9 +96,6 @@ pub fn main() !void {
                 try render();
             }
         }
-    }
-    if (g) {
-        f(cursor);
     }
 }
 
@@ -123,19 +146,4 @@ fn menuEntry(rc: *spoon.Term.RenderContext, name: []const u8, row: usize, width:
 fn handleSigWinch(_: c_int) callconv(.C) void {
     term.fetchSize() catch {};
     render() catch {};
-}
-
-fn f(i: usize) void {
-    term.deinit() catch {};
-    const win = std.crypto.random.boolean();
-    if (0 == i % 2) {
-        std.debug.print("heads", .{});
-    } else {
-        std.debug.print("tails", .{});
-    }
-    if (win) {
-        std.debug.print(" won!", .{});
-    } else {
-        std.debug.print(" lost!", .{});
-    }
 }
