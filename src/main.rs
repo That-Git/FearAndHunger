@@ -2,6 +2,7 @@ use {
     anyhow::Result, clap::Parser, rand::{thread_rng, Rng}, std::time::Duration
 };
 
+
 enum Face {
     Heads,
     Tails,
@@ -25,6 +26,7 @@ impl Face {
     }
 }
 
+
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
@@ -36,7 +38,6 @@ struct Args {
     #[arg(short, long, default_value_t = 5)]
     of: u16,
 }
-
 
 
 #[tokio::main]
