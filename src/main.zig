@@ -13,9 +13,15 @@ var loop: bool = true;
 var cursor: usize = 0;
 
 fn argue() ?bool {
-    const a = std.os.argv;
+    const a: [][*:0]u8 = std.os.argv;
+    var face: []const u8 = "";
     for (a[1..a.len]) |arg| {
-        std.debug.print("  {s}\n", .{arg});
+        face = mem.span(arg);
+        if (mem.eql(u8, face, "heads")) {
+            return true;
+        } else if (mem.eql(u8, face, "tails")) {
+            return false;
+        }
     }
     return null;
 }
