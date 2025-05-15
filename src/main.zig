@@ -1,6 +1,4 @@
 const std = @import("std");
-const heap = std.heap;
-const math = std.math;
 const mem = std.mem;
 const os = std.posix.system;
 const stdout = std.io.getStdOut().writer();
@@ -55,7 +53,7 @@ fn select() !void {
     try term.init(.{});
     defer term.deinit() catch {};
 
-    try std.posix.sigaction(os.SIG.WINCH, &os.Sigaction{
+    std.posix.sigaction(os.SIG.WINCH, &os.Sigaction{
         .handler = .{ .handler = handleSigWinch },
         .mask = os.empty_sigset,
         .flags = 0,
