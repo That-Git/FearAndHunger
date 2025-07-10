@@ -1,5 +1,5 @@
 use {
-    anyhow::Result, clap::Parser, rand::{rng, Rng}, std::time::Duration
+    anyhow::Result, clap::Parser, rand::random_bool as chance, std::time::Duration
 };
 
 
@@ -46,14 +46,16 @@ async fn main() -> Result<()> {
 
     let mut sum: u16 = 0;
     for _ in 0..of {
-        let mut rng = rng();
-        
-        let coin: u16 = rng.random_range(0..=1);
-        sum += coin
+        if chance(0.5) {
+            sum += 1;
+        }
     }
+
     let percent: f64 = 100.0*f64::from(sum)/f64::from(of);
+
     println!("drum roll please...");
     tokio::time::sleep(Duration::from_secs(3)).await;
+
     println!("{}% {}, you {}", percent, face.ball(), if percent > 50.0 { "won" } else { "lost" });
     return Ok(());
 }
