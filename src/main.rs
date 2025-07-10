@@ -1,5 +1,5 @@
 use {
-    anyhow::Result, clap::Parser, rand::{thread_rng, Rng}, std::time::Duration
+    anyhow::Result, clap::Parser, rand::{rng, Rng}, std::time::Duration
 };
 
 
@@ -46,9 +46,9 @@ async fn main() -> Result<()> {
 
     let mut sum: u16 = 0;
     for _ in 0..of {
-        let mut rng = thread_rng();
+        let mut rng = rng();
         
-        let coin: u16 = rng.gen_range(0..=1);
+        let coin: u16 = rng.random_range(0..=1);
         sum += coin
     }
     let percent: f64 = 100.0*f64::from(sum)/f64::from(of);
